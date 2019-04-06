@@ -1,0 +1,23 @@
+{
+    "name": "alsoknownasdrew/packtpub-bot",
+    "description": "Simple chat bot for sending daily Packt Publishing Free eBooks to your Slack channel",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "alsoknownasdrew",
+            "email": "andriy.frankevych@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^4.2"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "PPBot\\" : "src/"
+        }
+    }
+}
