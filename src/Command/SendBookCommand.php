@@ -24,6 +24,8 @@ class SendBookCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $output->writeln('Hello world!');
+        $message = "Today's free book: https://www.packtpub.com/packt/offers/free-learning";
+        
+        $output->writeln($message);
     }
 }
