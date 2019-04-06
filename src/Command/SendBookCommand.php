@@ -17,11 +17,17 @@ class SendBookCommand extends Command
 {
     protected function configure(): void
     {
+        $description = 'Sends the latest Packt Publishing Free eBbook to specified in .env Slack channel.';
+
         $this->setName('send-book')
-            ->setDescription('Sends the latest Packt Publishing Free eBbook to specified in .env Slack channel.')
-            ->setHelp('Sends the latest Packt Publishing Free eBbook to specified in .env Slack channel.');
+            ->setDescription($description)
+            ->setHelp($description);
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $message = "Today's free book: https://www.packtpub.com/packt/offers/free-learning";
