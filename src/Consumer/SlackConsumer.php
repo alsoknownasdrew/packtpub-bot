@@ -42,7 +42,6 @@ class SlackConsumer
      */
     public function sendBookMessage(): void
     {
-
         $body = \GuzzleHttp\json_encode(['text' => "Today's free book: https://www.packtpub.com/packt/offers/free-learning!"]);
         $request = $this->requestFactory->createRequest($body);
 
