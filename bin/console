@@ -1,16 +1,26 @@
 #!/usr/bin/env php
 <?php
 
+declare(strict_types=1);
+
 require __DIR__ . '/../vendor/autoload.php';
+
+$config = require __DIR__ . '/../config/config.php';
 
 use Symfony\Component\Console\Application;
 use PPBot\Command\SendBookCommand;
+use GuzzleHttp\Client;
+use PPBot\Consumer\SlackConsumer;
+use PPBot\Request\SlackRequestFactory;
 
-$command = new SendBookCommand();
+$HTTPClient = new Client();
+$slackRequestFactory = new SlackRequestFactory($config);
+$slackConsumer = new SlackConsumer($HTTPClient, $slackRequestFactory);
+
+$command = new SendBookCommand($slackConsumer);
+
 $application = new Application();
-
 $application->add($command);
-
 $application->setDefaultCommand($command->getName());
 
 $application->run();
