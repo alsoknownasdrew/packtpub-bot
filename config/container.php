@@ -8,7 +8,10 @@ $container = new Container;
 
 $config = require __DIR__ . '/config.php';
 
+//Application dependencies
 $container->add(\GuzzleHttp\Client::class);
+
+//Application components
 $container->add(\PPBot\Request\SlackRequestFactory::class)->addArgument($config);
 
 $container->add(\PPBot\Consumer\SlackConsumer::class)

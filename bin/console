@@ -12,10 +12,9 @@ use Symfony\Component\Console\Application;
  */
 $container = require __DIR__ . '/../config/container.php';
 
+$app = new Application();
+
 $sendBookCommand = $container->get(\PPBot\Command\SendBookCommand::class);
+$app->add($sendBookCommand);
 
-$application = new Application();
-$application->add($sendBookCommand);
-$application->setDefaultCommand($sendBookCommand->getName());
-
-$application->run();
+$app->run();

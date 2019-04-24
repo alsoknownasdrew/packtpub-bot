@@ -52,8 +52,8 @@ class SendBookCommand extends Command
     {
         try {
             $this->slackConsumer->sendBookMessage();
-        } catch (GuzzleException $e) {
-            throw new RuntimeException($e->getMessage());
+        } catch (GuzzleException $exception) {
+            throw new RuntimeException($exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }
