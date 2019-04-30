@@ -5,16 +5,11 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Symfony\Component\Console\Application;
-
 /**
  * @var \Psr\Container\ContainerInterface
  */
 $container = require __DIR__ . '/../config/container.php';
 
-$app = new Application();
-
-$sendBookCommand = $container->get(\PPBot\Command\SendBookCommand::class);
-$app->add($sendBookCommand);
+$app = $container->get(\Symfony\Component\Console\Application::class);
 
 $app->run();
