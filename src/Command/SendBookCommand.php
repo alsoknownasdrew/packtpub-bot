@@ -6,6 +6,7 @@ namespace PPBot\Command;
 
 use GuzzleHttp\Exception\GuzzleException;
 use PPBot\Consumer\SlackConsumer;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,6 +23,11 @@ class SendBookCommand extends Command
      */
     private $slackConsumer;
 
+    /**
+     * SendBookCommand constructor.
+     *
+     * @param SlackConsumer $slackConsumer
+     */
     public function __construct(SlackConsumer $slackConsumer)
     {
         $this->slackConsumer = $slackConsumer;
@@ -41,14 +47,13 @@ class SendBookCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         try {
             $this->slackConsumer->sendBookMessage();
-        } catch (GuzzleException $e) {
-            echo $e->getMessage();
+        } catch (GuzzleException $exception) {
+            throw new RuntimeException($exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 }
