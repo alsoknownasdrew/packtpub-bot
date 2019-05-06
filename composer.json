@@ -10,6 +10,8 @@
         }
     ],
     "require": {
+        "php": "7.2.*",
+        "ext-json": "*",
         "symfony/console": "^4.2",
         "guzzlehttp/guzzle": "~6.0",
         "league/container": "^3.2"

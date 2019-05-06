@@ -38,13 +38,16 @@ class SlackConsumer
     }
 
     /**
-     * @throws GuzzleException
+     * @param string $body
      */
-    public function sendBookMessage(): void
+    public function sendMessage(string $body): void
     {
-        $body = \GuzzleHttp\json_encode(['text' => "Today's free book: https://www.packtpub.com/packt/offers/free-learning!"]);
         $request = $this->requestFactory->createRequest($body);
 
-        $this->client->send($request);
+        try {
+            $this->client->send($request);
+        } catch (GuzzleException $e) {
+            throw new \RuntimeException('Error: Couldn\'t send message to Slack.', $e->getCode(), $e);
+        }
     }
 }

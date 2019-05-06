@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PPBot\Command;
 
-use GuzzleHttp\Exception\GuzzleException;
 use PPBot\Consumer\SlackConsumer;
-use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -50,10 +48,8 @@ class SendBookCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        try {
-            $this->slackConsumer->sendBookMessage();
-        } catch (GuzzleException $exception) {
-            throw new RuntimeException($exception->getMessage(), $exception->getCode(), $exception);
-        }
+        $messageBody = json_encode(['text' => "Today's free book: https://www.packtpub.com/packt/offers/free-learning!"]);
+
+        $this->slackConsumer->sendMessage($messageBody);
     }
 }
