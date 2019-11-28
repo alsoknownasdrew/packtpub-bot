@@ -11,20 +11,35 @@ $config = require __DIR__ . '/config.php';
 /**
  * Application dependencies
  */
-$container->add(\GuzzleHttp\Client::class);
+$container->add(\GuzzleHttp\ClientInterface::class, \GuzzleHttp\Client::class);
 
 /**
  * Core components
  */
-$container->add(\PPBot\Request\SlackRequestFactory::class)->addArgument($config);
+$container->add(\PPBot\Service\PacktPub\PacktPubClientInterface::class, \PPBot\Service\PacktPub\PacktPubClient::class)
+    ->addArgument(\GuzzleHttp\ClientInterface::class);
 
-$container->add(\PPBot\Consumer\SlackConsumer::class)
-    ->addArgument(\GuzzleHttp\Client::class)
-    ->addArgument(\PPBot\Request\SlackRequestFactory::class);
+$container->add(\PPBot\Service\Slack\SlackClientInterface::class, \PPBot\Service\Slack\SlackClient::class)
+    ->addArgument(\GuzzleHttp\ClientInterface::class)
+    ->addArgument($config['slack']['webhooks']['channel']);
 
-$container->add(\PPBot\Command\SendBookCommand::class)->addArgument(\PPBot\Consumer\SlackConsumer::class);
+$container->add(\PPBot\Service\BookToSlackMessageConverter::class);
 
-$container->add(\Symfony\Component\Console\Application::class, function() use ($container) {
+$container->add(\PPBot\Book\Builder\BookBuilder::class);
+
+$container->add(\PPBot\Book\Fetcher\BookFetcherInterface::class, \PPBot\Book\Fetcher\BookAPIFetcher::class)
+    ->addArgument(\PPBot\Service\PacktPub\PacktPubClientInterface::class)
+    ->addArgument(\PPBot\Book\Builder\BookBuilder::class);
+
+$container->add(\PPBot\Sender\BookSenderInterface::class, \PPBot\Sender\SlackBookSender::class)
+    ->addArgument(\PPBot\Service\Slack\SlackClientInterface::class)
+    ->addArgument(\PPBot\Service\BookToSlackMessageConverter::class);
+
+$container->add(\PPBot\Command\SendBookCommand::class)
+    ->addArgument(\PPBot\Book\Fetcher\BookFetcherInterface::class)
+    ->addArgument(\PPBot\Sender\BookSenderInterface::class);
+
+$container->add(\Symfony\Component\Console\Application::class, static function () use ($container) {
     $app = new \Symfony\Component\Console\Application();
     $app->add($container->get(\PPBot\Command\SendBookCommand::class));
 

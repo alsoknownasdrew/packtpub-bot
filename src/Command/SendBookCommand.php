@@ -4,31 +4,24 @@ declare(strict_types=1);
 
 namespace PPBot\Command;
 
-use PPBot\Consumer\SlackConsumer;
+use PPBot\Book\Fetcher\BookFetcherInterface;
+use PPBot\Sender\BookSenderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class SendBookCommand
- *
- * @package PPBot\Command
- */
 class SendBookCommand extends Command
 {
-    /**
-     * @var SlackConsumer
-     */
-    private $slackConsumer;
+    /** @var BookFetcherInterface */
+    private $bookFetcher;
 
-    /**
-     * SendBookCommand constructor.
-     *
-     * @param SlackConsumer $slackConsumer
-     */
-    public function __construct(SlackConsumer $slackConsumer)
+    /** @var BookSenderInterface */
+    private $bookSender;
+
+    public function __construct(BookFetcherInterface $bookFetcher, BookSenderInterface $bookSender)
     {
-        $this->slackConsumer = $slackConsumer;
+        $this->bookFetcher = $bookFetcher;
+        $this->bookSender = $bookSender;
 
         parent::__construct();
     }
@@ -37,19 +30,14 @@ class SendBookCommand extends Command
     {
         $description = 'Sends the latest Packt Publishing Free eBook to specified in .env Slack channel.';
 
-        $this->setName('send-book')
+        $this->setName('send')
             ->setDescription($description)
             ->setHelp($description);
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $messageBody = json_encode(['text' => "Today's free book: https://www.packtpub.com/packt/offers/free-learning!"]);
-
-        $this->slackConsumer->sendMessage($messageBody);
+        $book = $this->bookFetcher->fetch();
+        $this->bookSender->send($book);
     }
 }
