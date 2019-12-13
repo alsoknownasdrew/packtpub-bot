@@ -38,7 +38,7 @@ class BookToSlackMessageConverter
         foreach ($book->getAuthors() as $author) {
             $text .= "_{$author->getName()}_\n";
         }
-        $text .= "\n\n";
+        $text .= "\n";
         $text .= "{$book->getPublicationDate()->format('M Y')} \n\n";
         $text .= $book->getDescription();
 

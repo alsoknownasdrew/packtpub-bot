@@ -1,17 +1,12 @@
 version: '3.7'
 
 services:
-  php: &php-base
+  ppbot:
     build:
-      context: docker
-      dockerfile: dev/php/Dockerfile
+      context: .
+      dockerfile: docker/prod/php/Dockerfile
+    image: ppbot
     working_dir: /var/www/packtpub-bot
-    volumes:
-      - .:/var/www/packtpub-bot
     env_file:
       - .env
-
-  ppbot:
-    <<: *php-base
-    image: ppbot
     entrypoint: php bin/console
