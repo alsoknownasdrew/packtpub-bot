@@ -37,7 +37,11 @@ class SendBookCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $book = $this->bookFetcher->fetch();
-        $this->bookSender->send($book);
+        try {
+            $book = $this->bookFetcher->fetch();
+            $this->bookSender->send($book);
+        } catch (\Exception $exception) {
+            throw new \RuntimeException('There are currently no free offers.');
+        }
     }
 }

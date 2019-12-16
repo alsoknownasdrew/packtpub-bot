@@ -45,6 +45,10 @@ class PacktPubClient implements PacktPubClientInterface
         }
         $todaysOfferResponseData = \json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
+        if (empty($todaysOfferResponseData['data'])) {
+            throw new DataFetchingErrorException('There are currently no free offers.', 500);
+        }
+
         return $todaysOfferResponseData['data'][0];
     }
 
