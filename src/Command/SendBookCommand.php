@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PPBot\Command;
 
-use PPBot\Book\Fetcher\BookFetcherInterface;
+use PPBot\Fetcher\BookFetcherInterface;
 use PPBot\Sender\BookSenderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,7 +35,10 @@ class SendBookCommand extends Command
             ->setHelp($description);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    /**
+     * @return int|void|null
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
             $book = $this->bookFetcher->fetch();

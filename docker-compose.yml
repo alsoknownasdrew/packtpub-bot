@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: docker/prod/php/Dockerfile
     image: ppbot
-    working_dir: /var/www/packtpub-bot
+    working_dir: /app
     env_file:
       - .env
     entrypoint: php bin/console

@@ -1,12 +1,12 @@
 version: '3.7'
 
 services:
-  php: &php-base
+  php:
     build:
       context: docker
       dockerfile: dev/php/Dockerfile
-    working_dir: /var/www/packtpub-bot
+    working_dir: /app
     volumes:
-      - .:/var/www/packtpub-bot
+      - .:/app
     env_file:
       - .env

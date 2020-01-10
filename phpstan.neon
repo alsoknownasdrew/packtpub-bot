@@ -1,0 +1,7 @@
+parameters:
+    level: 7
+    paths:
+        - src
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#Method PPBot\Command\SendBookCommand::execute() should return int|void|null but return statement is missing#'

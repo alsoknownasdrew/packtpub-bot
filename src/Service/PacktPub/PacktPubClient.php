@@ -67,9 +67,8 @@ class PacktPubClient implements PacktPubClientInterface
         } catch (\Exception|GuzzleException $exception) {
             throw new DataFetchingErrorException("Failed to load book data with id {$id}", 500, $exception);
         }
-        $bookResponseData = \json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
-        return $bookResponseData;
+        return \json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -88,14 +87,9 @@ class PacktPubClient implements PacktPubClientInterface
             throw new DataFetchingErrorException("Failed to load book data with id {$id}", 500, $exception);
         }
 
-        $authorResponseData = \json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
-
-        return $authorResponseData;
+        return \json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
     }
 
-    /**
-     * @throws DataFetchingErrorException
-     */
     public function fetchCoverURLByBookId(int $id): string
     {
         return "https://static.packt-cdn.com/products/{$id}/cover/smaller";

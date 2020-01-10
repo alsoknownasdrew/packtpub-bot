@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PPBot\Book\Entity;
+namespace PPBot\Entity;
 
 use DateTime;
 
@@ -26,6 +26,14 @@ class Book
     /** @var string */
     private $coverURL;
 
+    /**
+     * @param int $id
+     * @param string $title
+     * @param Author[] $authors
+     * @param DateTime $publicationDate
+     * @param string $description
+     * @param string $coverUrl
+     */
     public function __construct(int $id, string $title, array $authors, DateTime $publicationDate, string $description, string $coverUrl)
     {
         $this->id = $id;
