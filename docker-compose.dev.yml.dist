@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  php: &php-base
+  php:
     build:
       context: docker
       dockerfile: dev/php/Dockerfile
