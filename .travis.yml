@@ -1,0 +1,13 @@
+language: php
+php:
+  - 7.3
+install:
+  - composer install
+
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit Tests"
+      script: composer test-unit
+    - script: composer static-checl
+      name: "Static analysis"
