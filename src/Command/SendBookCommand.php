@@ -44,7 +44,7 @@ class SendBookCommand extends Command
             $book = $this->bookFetcher->fetch();
             $this->bookSender->send($book);
         } catch (\Exception $exception) {
-            throw new \RuntimeException('There are currently no free offers.');
+            throw new \RuntimeException('An error occured on book data loading or there are currently no free offers.');
         }
     }
 }

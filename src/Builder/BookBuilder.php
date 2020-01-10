@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PPBot\Builder;
 
+use DateTime;
 use PPBot\Entity\Author;
 use PPBot\Entity\Book;
 
@@ -36,7 +37,7 @@ class BookBuilder implements BookBuilderInterface
         return $this;
     }
 
-    public function publicationDate(\DateTime $publicationDate): BookBuilder
+    public function publicationDate(DateTime $publicationDate): BookBuilder
     {
         $this->bookData['publicationDate'] = $publicationDate;
 

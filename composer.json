@@ -18,14 +18,17 @@
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
-        "phpstan/phpstan": "^0.12.4"
+        "phpstan/phpstan": "^0.12.4",
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {
-            "PPBot\\" : "src/"
+            "PPBot\\" : "src/",
+            "PPBotTests\\" : "tests/"
         }
     },
     "scripts": {
-        "static-check": "vendor/bin/phpstan analyse --ansi -c phpstan.neon"
+        "test-unit": "./vendor/bin/phpunit --testsuite Unit",
+        "static-check": "./vendor/bin/phpstan analyse --ansi -c phpstan.neon"
     }
 }
