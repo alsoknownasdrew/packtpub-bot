@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use League\Container\Container;
 
-$container = new Container;
+$container = new Container();
 
 $config = require __DIR__ . '/config.php';
 
@@ -25,18 +25,18 @@ $container->add(\PPBot\Service\Slack\SlackClientInterface::class, \PPBot\Service
 
 $container->add(\PPBot\Service\BookToSlackMessageConverter::class);
 
-$container->add(\PPBot\Book\Builder\BookBuilder::class);
+$container->add(\PPBot\Builder\BookBuilder::class);
 
-$container->add(\PPBot\Book\Fetcher\BookFetcherInterface::class, \PPBot\Book\Fetcher\BookAPIFetcher::class)
+$container->add(\PPBot\Fetcher\BookFetcherInterface::class, \PPBot\Fetcher\BookAPIFetcher::class)
     ->addArgument(\PPBot\Service\PacktPub\PacktPubClientInterface::class)
-    ->addArgument(\PPBot\Book\Builder\BookBuilder::class);
+    ->addArgument(\PPBot\Builder\BookBuilder::class);
 
 $container->add(\PPBot\Sender\BookSenderInterface::class, \PPBot\Sender\SlackBookSender::class)
     ->addArgument(\PPBot\Service\Slack\SlackClientInterface::class)
     ->addArgument(\PPBot\Service\BookToSlackMessageConverter::class);
 
 $container->add(\PPBot\Command\SendBookCommand::class)
-    ->addArgument(\PPBot\Book\Fetcher\BookFetcherInterface::class)
+    ->addArgument(\PPBot\Fetcher\BookFetcherInterface::class)
     ->addArgument(\PPBot\Sender\BookSenderInterface::class);
 
 $container->add(\Symfony\Component\Console\Application::class, static function () use ($container) {

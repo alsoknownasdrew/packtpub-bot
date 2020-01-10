@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PPBot\Book\Fetcher;
+namespace PPBot\Fetcher;
 
-use PPBot\Book\Entity\Book;
+use PPBot\Entity\Book;
 
 interface BookFetcherInterface
 {

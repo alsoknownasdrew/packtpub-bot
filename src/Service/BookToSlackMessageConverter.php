@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PPBot\Service;
 
-use PPBot\Book\Entity\Book;
+use PPBot\Entity\Book;
 
 class BookToSlackMessageConverter
 {

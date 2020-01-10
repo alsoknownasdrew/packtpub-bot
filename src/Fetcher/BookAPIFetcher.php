@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PPBot\Book\Fetcher;
+namespace PPBot\Fetcher;
 
-use PPBot\Book\Builder\BookBuilder;
-use PPBot\Book\Entity\Author;
-use PPBot\Book\Entity\Book;
+use PPBot\Builder\BookBuilder;
+use PPBot\Entity\Author;
+use PPBot\Entity\Book;
 use PPBot\Service\PacktPub\PacktPubClientInterface;
 
 class BookAPIFetcher implements BookFetcherInterface

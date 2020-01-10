@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PPBot\Book\Entity;
+namespace PPBot\Entity;
 
 class Author
 {

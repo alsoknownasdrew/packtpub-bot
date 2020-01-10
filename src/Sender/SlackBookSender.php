@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PPBot\Sender;
 
-use PPBot\Book\Entity\Book;
+use PPBot\Entity\Book;
 use PPBot\Service\BookToSlackMessageConverter;
 use PPBot\Service\Slack\SlackClientInterface;
 
