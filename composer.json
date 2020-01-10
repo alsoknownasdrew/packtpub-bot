@@ -23,7 +23,8 @@
     },
     "autoload": {
         "psr-4": {
-            "PPBot\\" : "src/"
+            "PPBot\\" : "src/",
+            "PPBotTests\\" : "tests/"
         }
     },
     "scripts": {

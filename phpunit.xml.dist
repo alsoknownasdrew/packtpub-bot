@@ -5,7 +5,7 @@
          verbose="true"
          colors="true">
     <testsuites>
-        <testsuite name="unit">
+        <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
     </testsuites>
@@ -13,6 +13,8 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
             <exclude>
+                <directory suffix=".php">src/Command</directory>
+                <directory suffix=".php">src/Entity</directory>
                 <directory suffix=".php">src/Exception</directory>
             </exclude>
         </whitelist>

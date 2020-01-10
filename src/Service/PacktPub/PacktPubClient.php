@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PPBot\Service\PacktPub;
 
+use DateTime;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
@@ -30,7 +31,7 @@ class PacktPubClient implements PacktPubClientInterface
      */
     public function fetchTodaysOffer(): array
     {
-        $currentDate = new \DateTime();
+        $currentDate = new DateTime();
         $request = new Request(
             'GET',
             self::OFFER_URL
