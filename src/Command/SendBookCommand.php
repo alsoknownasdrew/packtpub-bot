@@ -35,7 +35,10 @@ class SendBookCommand extends Command
             ->setHelp($description);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    /**
+     * @return int|void|null
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
             $book = $this->bookFetcher->fetch();

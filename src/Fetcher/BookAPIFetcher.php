@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PPBot\Fetcher;
 
+use http\Exception\RuntimeException;
 use PPBot\Builder\BookBuilder;
 use PPBot\Entity\Author;
 use PPBot\Entity\Book;
@@ -34,13 +35,18 @@ class BookAPIFetcher implements BookFetcherInterface
             return new Author((int) $authorData['id'], $authorData['author']);
         }, $bookData['authors']);
 
+        $pubblicationDate = \DateTime::createFromFormat('Y-m-d\TH:i:s.uP', $bookData['publicationDate']);
+        if (false === $pubblicationDate) {
+            throw new \RuntimeException('Pubblication date format error');
+        }
+
         return $this->bookBuilder
             ->id((int) $bookData['productId'])
             ->title($bookData['title'])
             ->description($bookData['oneLiner'])
             ->authors($authorsCollection)
             ->coverURL($this->packPubClient->fetchCoverURLByBookId((int) $bookData['productId']))
-            ->publicationDate(\DateTime::createFromFormat('Y-m-d\TH:i:s.uP', $bookData['publicationDate']))
+            ->publicationDate($pubblicationDate)
             ->build();
     }
 }

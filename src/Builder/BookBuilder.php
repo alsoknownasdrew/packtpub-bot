@@ -9,6 +9,7 @@ use PPBot\Entity\Book;
 
 class BookBuilder implements BookBuilderInterface
 {
+    /** @var array */
     private $bookData = [];
 
     public function id(int $id): BookBuilder
@@ -26,7 +27,7 @@ class BookBuilder implements BookBuilderInterface
     }
 
     /**
-     * @param Author[]
+     * @param Author[] $authors
      */
     public function authors(array $authors): BookBuilder
     {

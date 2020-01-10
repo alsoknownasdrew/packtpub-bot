@@ -16,7 +16,7 @@ class SlackBookSender implements BookSenderInterface
     /** @var SlackClientInterface */
     private $slackClient;
 
-    public function __construct(SlackClientInterface $slackClient, $bookToSlackMessageConverter)
+    public function __construct(SlackClientInterface $slackClient, BookToSlackMessageConverter $bookToSlackMessageConverter)
     {
         $this->bookToSlackMessageConverter = $bookToSlackMessageConverter;
         $this->slackClient = $slackClient;
