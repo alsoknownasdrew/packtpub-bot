@@ -48,7 +48,7 @@ class BookBuilderTest extends TestCase
      * @test
      * @dataProvider bookDataProvider
      */
-    public function createsABook(array $bookData): void
+    public function createsBook(array $bookData): void
     {
         $book = $this->bookBuilder
             ->id($bookData['id'])
