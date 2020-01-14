@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PPBot\Fetcher;
 
 use DateTime;
-use http\Exception\RuntimeException;
 use PPBot\Builder\BookBuilder;
 use PPBot\Entity\Author;
 use PPBot\Entity\Book;
