@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PPBotTests\Unit\Builder;
+namespace PPBot\Tests\Unit\Builder;
 
 use DateTime;
 use PHPUnit\Framework\MockObject\MockObject;

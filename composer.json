@@ -23,8 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PPBot\\" : "src/",
-            "PPBotTests\\" : "tests/"
+            "PPBot\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PPBot\\Tests\\" : "tests/"
         }
     },
     "scripts": {
