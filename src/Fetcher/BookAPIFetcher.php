@@ -24,6 +24,7 @@ class BookAPIFetcher implements BookFetcherInterface
         $this->bookBuilder = $bookBuilder;
     }
 
+    // this stuff smells
     public function fetch(): Book
     {
         $todaysOfferData = $this->packPubClient->fetchTodaysOffer();
